@@ -7,6 +7,7 @@ import userRoutes from "./routes/userRoutes.js";
 import { v2 as cloudinary } from "cloudinary";
 import postRoutes from "./routes/postRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -18,6 +19,13 @@ cloudinary.config({
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.use(
+  cors({
+    origin: ["https://lite-tweet-f.vercel.app"],
+    credentials: true,
+  }),
+);
 
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
